@@ -29,9 +29,13 @@ export default function Home() {
 					<div className="flex flex-row flex-wrap w-full h-full m-8">
 						{posts.map(({ id, title, author, createdAt, content }) => (
 							<Card key={id}>
-								<h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 ">
+								<h5 className="text-xl font-bold tracking-tight text-gray-900 ">
 									{title}
 								</h5>
+								<div className="flex flex-row justify-between mt-1 mb-3">
+									<p className="text-xs font-normal">By {author}</p>
+									<p className="text-xs font-light">{createdAt}</p>
+								</div>
 								<p className="mb-3 font-normal text-gray-700 ">
 									{content.slice(0, content.lastIndexOf(' ', 100)) + ' ...'}
 								</p>
