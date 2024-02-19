@@ -1,48 +1,57 @@
+import Link from 'next/link';
+
 export default function CreatePost() {
 	return (
 		<>
-			<div className="p-7">
-				<h1 className=" font-semibold text-3xl">Create Blog Post</h1>
-			</div>
-			<div className="flex justify-center items-center">
-				<div className=" w-full mx-5 border"></div>
-			</div>
-			<div className="w-full h-3/5   flex flex-row justify-center items-center ">
-				<div className="shadow-xl rounded-lg bg-white w-1/2 h-5/6 p-4">
-					<div className="w-full h-full">
-						<div className="flex flex-row justify-center items-center ml-8">
-							<label
-								htmlFor="title"
-								className="m-1 text-lg">
-								Title:
-							</label>
-							<input
-								className="m-8 p-2 w-1/2 border-black border-2 rounded-md"
-								type="text"
-								name="title"
-							/>
-						</div>
-						<div className="flex flex-row justify-center items-start">
-							<label
-								htmlFor="content"
-								className="mx-2 text-lg">
-								Content:
-							</label>
-							<textarea
-								className=" p-2 border-black border-2 rounded-md"
-								name="content"
-								id="content"
-								cols={36}
-								rows={4}></textarea>
-						</div>
-						<div className="flex flex-row justify-end items-center h-1/4 w-4/5">
-							<button className="border border-blue-100 bg-blue-400 p-2 rounded">
-								Post
-							</button>
+			<section className="bg-gray-50 ">
+				<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+					<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 ">
+						<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+							<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
+								Create a Blog Post
+							</h1>
+							<form
+								className="space-y-4 md:space-y-6"
+								action="#">
+								<div>
+									<label
+										htmlFor="title"
+										className="block mb-2 text-sm font-medium text-gray-900 ">
+										Title
+									</label>
+									<input
+										type="text"
+										name="title"
+										id="title"
+										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+										placeholder="Bard is now Gemini"
+										required
+									/>
+								</div>
+								<div>
+									<label
+										htmlFor="message"
+										className="block mb-2 text-sm font-medium text-gray-900 ">
+										Content
+									</label>
+									<textarea
+										id="message"
+										rows={2}
+										className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+										placeholder="Content goes here..."
+										defaultValue={''}
+									/>
+								</div>
+								<button
+									type="submit"
+									className="w-full border  text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+									Post
+								</button>
+							</form>
 						</div>
 					</div>
 				</div>
-			</div>
+			</section>
 		</>
 	);
 }

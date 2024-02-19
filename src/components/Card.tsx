@@ -1,6 +1,6 @@
 export default function Card({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="w-80 h-52 bg-white rounded shadow-md hover:shadow-xl py-6 px-4 m-2">
+		<div className="p-6 m-4 bg-white border border-gray-200 rounded-lg shadow max-w-72">
 			{children}
 		</div>
 	);

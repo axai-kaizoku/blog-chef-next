@@ -4,7 +4,7 @@ export default function Header() {
 	return (
 		<header>
 			<nav
-				className="bg-slate-200 shadow-lg w-full h-16 flex flex-row justify-between items-center "
+				className="flex flex-row items-center justify-between w-full h-16 shadow-lg bg-slate-200 "
 				id="nav">
 				<h3>
 					<Link
@@ -23,7 +23,7 @@ export default function Header() {
 				</ul>
 				<ul className="flex flex-row gap-8 mx-8">
 					<li>
-						<Link href="/login">Login</Link>
+						<Link href="/signin">Signin</Link>
 					</li>
 					<li>
 						<Link href="/signup">Signup</Link>

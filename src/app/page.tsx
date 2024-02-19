@@ -3,11 +3,11 @@ import Link from 'next/link';
 import posts from './data';
 
 export default function Home() {
-	const user = true;
+	const user = false;
 	return (
 		<>
 			<div className="p-7">
-				<h1 className=" font-semibold text-3xl">Welcome to BlogChef.</h1>
+				<h1 className="text-3xl font-semibold ">Welcome to BlogChef.</h1>
 				<p>Tech and Trendy Blogs</p>
 				{user ? (
 					<div>
@@ -21,28 +21,26 @@ export default function Home() {
 					<></>
 				)}
 			</div>
-			<div className="flex justify-center items-center">
-				<div className=" w-full mx-5 border "></div>
+			<div className="flex items-center justify-center">
+				<div className="w-full mx-5 border "></div>
 			</div>
-			<div className="w-full h-0 flex justify-center items-center">
-				<div className="w-11/12 h-full p-8 flex flex-row  justify-center">
-					<div className="w-full h-full m-8 flex flex-row flex-wrap">
+			<div className="flex items-center justify-center w-full h-0">
+				<div className="flex flex-row justify-center w-11/12 h-full p-8">
+					<div className="flex flex-row flex-wrap w-full h-full m-8">
 						{posts.map(({ id, title, author, createdAt, content }) => (
-							<Link
-								key={id}
-								href={`post/${id}`}>
-								<Card>
-									<h1 className="text-xl font-medium">{title}</h1>
-									<div className="flex flex-row justify-between">
-										<p className="text-xs">By {author}</p>
-										<p className="text-xs">{createdAt}</p>
-									</div>
-									<br />
-									<p className="text-sm">
-										{content.slice(0, content.lastIndexOf(' ', 160)) + ' ...'}
-									</p>
-								</Card>
-							</Link>
+							<Card key={id}>
+								<h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 ">
+									{title}
+								</h5>
+								<p className="mb-3 font-normal text-gray-700 ">
+									{content.slice(0, content.lastIndexOf(' ', 100)) + ' ...'}
+								</p>
+								<Link
+									href={`post/${id}`}
+									className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-slate-800 hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 ">
+									Read more
+								</Link>
+							</Card>
 						))}
 					</div>
 				</div>
