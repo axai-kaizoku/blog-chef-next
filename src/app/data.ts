@@ -6,6 +6,15 @@ export type Post = {
 	createdAt: string;
 };
 
+export type User = {
+	id: string;
+	name: string;
+	email: string;
+	password: string;
+	isAdmin: boolean;
+	lastLoggedIn: string;
+};
+
 const PostsData: Post[] = [
 	{
 		id: '1',
