@@ -10,20 +10,17 @@ export const metadata: Metadata = {
 	description: 'Basic Blog App created using Next',
 };
 
-export default function RootLayout({
-	children,
-	modal,
-}: {
-	children: React.ReactNode;
+export default function RootLayout(props: {
 	modal: React.ReactNode;
+	children: React.ReactNode;
 }) {
 	return (
 		<html lang="en">
 			<body className={inter.className}>
 				<Header />
 				<main className="w-full h-screen bg-slate-50 ">
-					{modal}
-					{children}
+					{props.modal}
+					{props.children}
 				</main>
 			</body>
 		</html>

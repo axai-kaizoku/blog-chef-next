@@ -11,7 +11,7 @@ const PostsData: Post[] = [
 		id: '1',
 		title: 'Next is future Web',
 		content:
-			'itself safety curve play tears again burn comfortable thumb kill fourth solar generally shorter include underline sell cannot bar catch sky clearly standard crack steel doing vapor air ants family heard store children unusual mix take essential primitive size asleep sail cake back camp basis car wheel whistleseat subject swung familiar experience popular even equal sell shorter chicken brain behind triangle forty floating liquid vapor search daily horse zero frozen afternoonrunning fox coat coach twenty congress shoe lay result chapter bone standard board young quiet trick interest cake trace lack purple wealth nearly forwarddried subject eaten tape medicine imagine rapidly pressure degree like write directly goose likely honor written yet track you hill wall form treated relationship',
+			'In the dynamic world of web development, frameworks, and libraries come and go, each promising to revolutionize the way we build web applications. Yet, few have made an impact as significant as Next.js in recent years. Originally introduced by Vercel (formerly Zeit) in 2016, Next.js emerged as a modest solution to some of React’s challenges, particularly around server-side rendering and routing. Today, it stands as one of the most influential tools in the React ecosystem, driving a paradigm shift in how we approach web development.',
 		author: 'Axai Kaizoku',
 		createdAt: '19th Feb',
 	},
