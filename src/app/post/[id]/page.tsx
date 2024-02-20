@@ -1,7 +1,28 @@
-import posts, { Post } from '../../data';
+'use client';
+import { useEffect, useState } from 'react';
+import { Post } from '../../data';
+import { useParams } from 'next/navigation';
 
-export default function Post({ params: { id } }: { params: { id: string } }) {
-	const post: Post = posts.find((p) => p.id === id)!;
+export default function Post() {
+	const params = useParams();
+	const [post, setPost] = useState<Post>({
+		id: '',
+		title: '',
+		content: '',
+		author: '',
+		createdAt: '',
+	});
+
+	const fetchPost = async () => {
+		const response = await fetch(`/posts/api/${params.id}`);
+		const data = await response.json();
+		setPost(data);
+	};
+
+	useEffect(() => {
+		fetchPost();
+	}, []);
+
 	return (
 		<>
 			<section className="bg-white">

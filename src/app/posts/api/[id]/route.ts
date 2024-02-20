@@ -5,7 +5,7 @@ export async function GET(
 	{ params }: { params: { id: string } },
 ) {
 	const post = posts.filter((p) => p.id === params.id);
-	return Response.json({ params: params.id, post });
+	return Response.json(post[0]);
 }
 
 export async function PUT(

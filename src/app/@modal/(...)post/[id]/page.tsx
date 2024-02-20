@@ -1,8 +1,28 @@
+'use client';
 import Modal from '@/components/Modal';
-import posts, { Post } from '../../../data';
+import { Post } from '../../../data';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function Post({ params: { id } }: { params: { id: string } }) {
-	const post: Post = posts.find((p) => p.id === id)!;
+	const params = useParams();
+	const [post, setPost] = useState<Post>({
+		id: '',
+		title: '',
+		content: '',
+		author: '',
+		createdAt: '',
+	});
+
+	const fetchPost = async () => {
+		const response = await fetch(`/posts/api/${params.id}`);
+		const data = await response.json();
+		setPost(data);
+	};
+
+	useEffect(() => {
+		fetchPost();
+	}, []);
 	return (
 		<Modal>
 			<section className="bg-white rounded">
