@@ -14,6 +14,7 @@ export async function POST(request: Request) {
 		createdAt: `${new Date().toDateString()}`,
 	};
 	posts.push(newPost);
+
 	return new Response(JSON.stringify(newPost), {
 		headers: {
 			'Content-Type': 'application/json',
