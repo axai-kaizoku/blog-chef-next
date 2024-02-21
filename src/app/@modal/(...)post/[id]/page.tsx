@@ -4,7 +4,7 @@ import { Post } from '../../../data';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function Post({ params: { id } }: { params: { id: string } }) {
+export default function Post() {
 	const params = useParams();
 	const [post, setPost] = useState<Post>({
 		id: '',

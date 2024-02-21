@@ -1,6 +1,25 @@
+'use client';
 import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Signin() {
+	const router = useRouter();
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
+	const loginUser = async () => {
+		const user = { email, password };
+		const response = await fetch('/signin/api', {
+			method: 'POST',
+			body: JSON.stringify(user),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		if (response.ok) router.push('/');
+	};
+
 	return (
 		<>
 			<section className="bg-gray-50 ">
@@ -12,7 +31,10 @@ export default function Signin() {
 							</h1>
 							<form
 								className="space-y-4 md:space-y-6"
-								action="#">
+								onSubmit={(e) => {
+									e.preventDefault();
+									loginUser();
+								}}>
 								<div>
 									<label
 										htmlFor="email"
@@ -25,6 +47,8 @@ export default function Signin() {
 										id="email"
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
 										placeholder="name@example.com"
+										value={email}
+										onChange={(e) => setEmail(e.target.value)}
 										required
 									/>
 								</div>
@@ -39,6 +63,8 @@ export default function Signin() {
 										name="password"
 										id="password"
 										placeholder="••••••••"
+										value={password}
+										onChange={(e) => setPassword(e.target.value)}
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
 										required
 									/>
