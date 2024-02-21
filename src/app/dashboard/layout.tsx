@@ -10,7 +10,7 @@ export default function DashboardLayout({
 	user: React.ReactNode;
 }) {
 	const isLoggedIn = true;
-	const isAdmin = true;
+	const isAdmin = false;
 
 	return isLoggedIn && isAdmin ? (
 		<div>

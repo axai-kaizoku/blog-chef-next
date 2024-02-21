@@ -1,3 +1,5 @@
-export async function GET() {
-	return new Response('getting all users');
+import { users } from '../users';
+
+export async function GET(request: Request) {
+	return Response.json(users);
 }

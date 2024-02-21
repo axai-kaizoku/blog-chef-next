@@ -6,15 +6,6 @@ export type Post = {
 	createdAt: string;
 };
 
-export type User = {
-	id: string;
-	name: string;
-	email: string;
-	password: string;
-	isAdmin: boolean;
-	lastLoggedIn: string;
-};
-
 const PostsData: Post[] = [
 	{
 		id: '1',
@@ -37,7 +28,7 @@ const PostsData: Post[] = [
 		title: 'The Secret Garden',
 		content:
 			'Hidden deep within the heart of the forest lies a secret garden filled with wonders untold. It is a place of magic and mystery, where flowers bloom in every shade of the rainbow and birds sing melodies that stir the soul. Only those pure of heart can find their way to this enchanted realm, where dreams come to life and the impossible becomes possible.',
-		author: 'Mystic Wanderer',
+		author: 'Joyful Soul',
 		createdAt: '23rd Feb',
 	},
 	{
@@ -53,7 +44,7 @@ const PostsData: Post[] = [
 		title: 'Echoes of the Past',
 		content:
 			'In the quiet solitude of an ancient ruin, echoes of the past whisper secrets long forgotten. Each crumbling stone bears witness to the passage of time, while the wind carries the echoes of laughter and tears that once filled these hallowed halls. Amidst the ruins, a sense of reverence lingers, reminding us of the fleeting nature of life and the enduring legacy of those who came before.',
-		author: 'Sage Historian',
+		author: 'Joyful Soul',
 		createdAt: '27th Feb',
 	},
 ];
