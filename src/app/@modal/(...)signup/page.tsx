@@ -39,14 +39,14 @@ export default function Signup() {
 								}}>
 								<div>
 									<label
-										htmlFor="name"
+										htmlFor="modalSignupName"
 										className="block mb-2 text-sm font-medium text-gray-900 ">
 										Your name
 									</label>
 									<input
 										type="text"
 										name="name"
-										id="name"
+										id="modalSignupName"
 										value={name}
 										onChange={(e) => setName(e.target.value)}
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
@@ -56,14 +56,14 @@ export default function Signup() {
 								</div>
 								<div>
 									<label
-										htmlFor="email"
+										htmlFor="modalSignupEmail"
 										className="block mb-2 text-sm font-medium text-gray-900 ">
 										Your email
 									</label>
 									<input
 										type="email"
 										name="email"
-										id="email"
+										id="modalSignupEmail"
 										value={email}
 										onChange={(e) => setEmail(e.target.value)}
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
@@ -73,14 +73,14 @@ export default function Signup() {
 								</div>
 								<div>
 									<label
-										htmlFor="password"
+										htmlFor="modalSignupPassword"
 										className="block mb-2 text-sm font-medium text-gray-900 ">
 										Password
 									</label>
 									<input
 										type="password"
 										name="password"
-										id="password"
+										id="modalSignupPassword"
 										value={password}
 										onChange={(e) => setPassword(e.target.value)}
 										placeholder="••••••••"

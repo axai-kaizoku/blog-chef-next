@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 export default function Signup() {
 	const router = useRouter();
+
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');

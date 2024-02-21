@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 export default function Header() {
+	const user = true;
 	return (
 		<header>
 			<nav
@@ -22,6 +23,13 @@ export default function Header() {
 					</li>
 				</ul>
 				<ul className="flex flex-row gap-8 mx-8">
+					{user ? (
+						<li>
+							<Link href="/dashboard">Dashboard</Link>
+						</li>
+					) : (
+						<></>
+					)}
 					<li>
 						<Link href="/signin">Signin</Link>
 					</li>

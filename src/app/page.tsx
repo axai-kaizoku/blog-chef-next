@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { Post } from './data';
 
 export default function Home() {
-	const user = false;
 	const [posts, setPosts] = useState([]);
 	const fetchPosts = async () => {
 		const response = await fetch('/posts/api');
@@ -20,17 +19,6 @@ export default function Home() {
 			<div className="p-7">
 				<h1 className="text-3xl font-semibold ">Welcome to BlogChef.</h1>
 				<p>Tech and Trendy Blogs</p>
-				{user ? (
-					<div>
-						<br />
-						<p>Axai Kaizoku</p>
-						<p className="text-xs font-extralight">
-							Last logged: 16:00 19th Feb
-						</p>
-					</div>
-				) : (
-					<></>
-				)}
 			</div>
 			<div className="flex items-center justify-center">
 				<div className="w-full mx-5 border "></div>

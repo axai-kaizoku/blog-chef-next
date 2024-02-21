@@ -3,7 +3,7 @@ export default function Dashboard() {
 	return (
 		<>
 			<div className="p-7 flex flex-row justify-between">
-				<h1 className="text-3xl font-semibold ">Dashboard</h1>
+				<h1 className="text-3xl font-semibold ">Admin Dashboard</h1>
 
 				{user ? (
 					<div>
