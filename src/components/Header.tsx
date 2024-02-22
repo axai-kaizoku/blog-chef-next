@@ -1,7 +1,28 @@
+'use client';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
-	const user = true;
+	let value;
+	if (typeof window !== 'undefined') {
+		value = sessionStorage.getItem('auth') || null;
+	}
+
+	const [user, setUser] = useState(value);
+
+	const handleLogout = () => {
+		sessionStorage.removeItem('auth');
+		setUser(null);
+	};
+
+	useEffect(() => {
+		// Check if 'window' is defined (running in the browser)
+		if (typeof window !== 'undefined') {
+			const storedUser = sessionStorage.getItem('auth');
+			setUser(storedUser);
+		}
+	}, []);
+
 	return (
 		<header>
 			<nav
@@ -30,12 +51,22 @@ export default function Header() {
 					) : (
 						<></>
 					)}
-					<li>
-						<Link href="/signin">Signin</Link>
-					</li>
-					<li>
-						<Link href="/signup">Signup</Link>
-					</li>
+					{!user ? (
+						<>
+							<li>
+								<Link href="/signin">Signin</Link>
+							</li>
+							<li>
+								<Link href="/signup">Signup</Link>
+							</li>
+						</>
+					) : (
+						<>
+							<li onClick={() => handleLogout()}>
+								<Link href="/">Logout</Link>
+							</li>
+						</>
+					)}
 				</ul>
 			</nav>
 		</header>

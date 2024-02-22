@@ -19,6 +19,17 @@ export default function Signin() {
 				'Content-Type': 'application/json',
 			},
 		});
+		const data = await response.json();
+		console.log(data);
+		// Check if 'window' is defined (running in the browser)
+		if (typeof window !== 'undefined') {
+			const auth = sessionStorage.getItem('auth');
+			if (!auth) {
+				sessionStorage.setItem('auth', JSON.stringify(data));
+			} else {
+				console.log('Already have auth');
+			}
+		}
 		if (response.ok) router.push('/');
 		router.refresh();
 	};
