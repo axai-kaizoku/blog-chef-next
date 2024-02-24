@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout(props: {
-	modal: React.ReactNode;
+	// modal: React.ReactNode;
 	children: React.ReactNode;
 }) {
 	const session = await getServerSession();
@@ -25,7 +25,7 @@ export default async function RootLayout(props: {
 				<AuthProvider session={session}>
 					<Header />
 					<main className="w-full h-screen bg-slate-50 ">
-						{props.modal}
+						{/* {props.modal} */}
 						{props.children}
 					</main>
 				</AuthProvider>

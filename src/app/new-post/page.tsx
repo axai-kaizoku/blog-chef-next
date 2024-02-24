@@ -1,23 +1,22 @@
-'use client';
-import Link from 'next/link';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import { getServerSession } from 'next-auth';
 
-export default function CreatePost() {
-	const router = useRouter();
-	const [title, setTitle] = useState('');
-	const [content, setContent] = useState('');
+export default async function CreatePost() {
+	const session = await getServerSession();
+	if (!session) {
+		redirect('/signin');
+	}
 
 	const savePost = async () => {
-		const newPost = { title, content };
-		const response = await fetch('/posts/api', {
-			method: 'POST',
-			body: JSON.stringify(newPost),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-		if (response.ok) router.push('/');
+		// const newPost = { title, content };
+		// const response = await fetch('/posts/api', {
+		// 	method: 'POST',
+		// 	body: JSON.stringify(newPost),
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 	},
+		// });
+		// if (response.ok) router.push('/');
 	};
 
 	return (
@@ -30,10 +29,6 @@ export default function CreatePost() {
 								Create a Blog Post
 							</h1>
 							<form
-								onSubmit={(e) => {
-									e.preventDefault();
-									savePost();
-								}}
 								className="space-y-4 md:space-y-6"
 								action="#">
 								<div>
@@ -46,8 +41,8 @@ export default function CreatePost() {
 										type="text"
 										name="title"
 										id="title"
-										value={title}
-										onChange={(e) => setTitle(e.target.value)}
+										// value={title}
+										// onChange={(e) => setTitle(e.target.value)}
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
 										placeholder="Bard is now Gemini"
 										required
@@ -62,8 +57,8 @@ export default function CreatePost() {
 									<textarea
 										id="message"
 										rows={2}
-										value={content}
-										onChange={(e) => setContent(e.target.value)}
+										// value={content}
+										// onChange={(e) => setContent(e.target.value)}
 										className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
 										placeholder="Content goes here..."
 									/>
