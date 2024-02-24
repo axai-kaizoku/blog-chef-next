@@ -1,5 +1,12 @@
-export default function Dashboard() {
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+
+export default async function Dashboard() {
 	const user = true;
+	const session = await getServerSession();
+	if (!session) {
+		redirect('/');
+	}
 	return (
 		<>
 			<div className="p-7 flex flex-row justify-between">

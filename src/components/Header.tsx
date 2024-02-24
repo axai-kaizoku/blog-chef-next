@@ -1,27 +1,9 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { signOut, useSession } from 'next-auth/react';
 
 export default function Header() {
-	let value;
-	if (typeof window !== 'undefined') {
-		value = sessionStorage.getItem('auth') || null;
-	}
-
-	const [user, setUser] = useState(value);
-
-	const handleLogout = () => {
-		sessionStorage.removeItem('auth');
-		setUser(null);
-	};
-
-	useEffect(() => {
-		// Check if 'window' is defined (running in the browser)
-		if (typeof window !== 'undefined') {
-			const storedUser = sessionStorage.getItem('auth');
-			setUser(storedUser);
-		}
-	}, []);
+	const { data: session }: any = useSession();
 
 	return (
 		<header>
@@ -44,14 +26,7 @@ export default function Header() {
 					</li>
 				</ul>
 				<ul className="flex flex-row gap-8 mx-8">
-					{user ? (
-						<li>
-							<Link href="/dashboard">Dashboard</Link>
-						</li>
-					) : (
-						<></>
-					)}
-					{!user ? (
+					{!session ? (
 						<>
 							<li>
 								<Link href="/signin">Signin</Link>
@@ -62,7 +37,10 @@ export default function Header() {
 						</>
 					) : (
 						<>
-							<li onClick={() => handleLogout()}>
+							<li>
+								<Link href="/dashboard">Dashboard</Link>
+							</li>
+							<li onClick={() => signOut()}>
 								<Link href="/">Logout</Link>
 							</li>
 						</>

@@ -9,10 +9,11 @@ export default function Signup() {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [error, setError] = useState('');
 
 	const createUser = async () => {
 		const newUser = { name, email, password };
-		const response = await fetch('signup/api', {
+		const response = await fetch('/api/signup', {
 			method: 'POST',
 			body: JSON.stringify(newUser),
 			headers: {

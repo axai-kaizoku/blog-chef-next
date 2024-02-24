@@ -1,36 +1,31 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { signIn, useSession } from 'next-auth/react';
 
 export default function Signin() {
 	const router = useRouter();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const session = useSession();
+
+	useEffect(() => {
+		if (session?.status === 'authenticated') {
+			router.replace('/dashboard');
+		}
+	}, [session, router]);
 
 	const loginUser = async () => {
 		const user = { email, password };
-		const response = await fetch('/signin/api', {
-			method: 'POST',
-			body: JSON.stringify(user),
-			headers: {
-				'Content-Type': 'application/json',
-			},
+
+		const res = await signIn('credentials', {
+			redirect: false,
+			email,
+			password,
 		});
-		const data = await response.json();
-		console.log(data);
 
-		// Check if 'window' is defined (running in the browser)
-		if (typeof window !== 'undefined') {
-			const auth = sessionStorage.getItem('auth');
-			if (!auth) {
-				sessionStorage.setItem('auth', JSON.stringify(data));
-			} else {
-				console.log('Already have auth');
-			}
-		}
-
-		if (response.ok) router.push('/');
+		if (res?.ok) router.replace('/dashboard');
 		router.refresh();
 	};
 

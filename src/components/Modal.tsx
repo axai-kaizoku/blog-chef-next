@@ -18,7 +18,6 @@ export default function Modal({ route = '', children }: ModalProps) {
 	const overLay = useRef(null);
 	const wrapper = useRef(null);
 	const router = useRouter();
-	const pathname = usePathname();
 
 	const onDismiss = useCallback(() => {
 		if (route === '') {
@@ -44,12 +43,6 @@ export default function Modal({ route = '', children }: ModalProps) {
 			if (e.key === 'Escape') onDismiss();
 		};
 	}, [onDismiss]);
-
-	useEffect(() => {
-		if (pathname === '/') {
-			onDismiss();
-		}
-	}, [pathname]);
 
 	useEffect(() => {
 		document.addEventListener('keydown', onKeyDown);

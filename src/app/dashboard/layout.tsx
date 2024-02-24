@@ -1,4 +1,7 @@
-export default function DashboardLayout({
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+
+export default async function DashboardLayout({
 	children,
 	users,
 	posts,
@@ -11,7 +14,10 @@ export default function DashboardLayout({
 }) {
 	const isLoggedIn = true;
 	const isAdmin = false;
-
+	const session = await getServerSession();
+	if (!session) {
+		redirect('/');
+	}
 	return isLoggedIn && isAdmin ? (
 		<div>
 			{children}
