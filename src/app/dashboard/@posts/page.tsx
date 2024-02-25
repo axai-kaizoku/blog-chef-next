@@ -1,14 +1,14 @@
 'use client';
 import DeleteBtn from '@/components/DeleteBtn';
 import { useEffect, useState } from 'react';
-import { Post } from '@/app/data';
+import Post from '@/types/Post';
 
 export default function Posts() {
 	const [posts, setPosts] = useState([]);
 	const getAllPosts = async () => {
-		const response = await fetch('/posts/api');
-		const data = await response.json();
-		setPosts(data);
+		// const response = await fetch('/posts/api');
+		// const data = await response.json();
+		// setPosts(data);
 	};
 
 	useEffect(() => {
@@ -21,7 +21,7 @@ export default function Posts() {
 			<ul className="flex flex-col m-4">
 				{posts.map((post: Post) => (
 					<li
-						key={post.id}
+						key={post._id}
 						className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-row justify-between items-center">
 						<div className="w-4/5">
 							<div className="flex flex-row justify-between items-center">

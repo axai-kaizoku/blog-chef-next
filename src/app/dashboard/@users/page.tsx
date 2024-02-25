@@ -1,15 +1,15 @@
 'use client';
 import DeleteBtn from '@/components/DeleteBtn';
 import { useEffect, useState } from 'react';
-import { User } from '@/app/users/users';
+import User from '@/types/User';
 
 export default function Users() {
 	const [users, setUsers] = useState([]);
 
 	const getAllUsers = async () => {
-		const response = await fetch('/users/api');
-		const data = await response.json();
-		setUsers(data);
+		// const response = await fetch('/users/api');
+		// const data = await response.json();
+		// setUsers(data);
 	};
 
 	useEffect(() => {
@@ -23,7 +23,7 @@ export default function Users() {
 			<ul className="flex flex-col m-4">
 				{users.map((user: User) => (
 					<li
-						key={user.id}
+						key={user._id}
 						className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-row justify-between items-center">
 						<div>
 							<p>{user.name}</p>

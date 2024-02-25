@@ -1,5 +1,4 @@
 import NextAuth, { AuthOptions } from 'next-auth';
-import { Account, User as AuthUser } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
@@ -24,6 +23,8 @@ export const authOptions: AuthOptions = {
 							user.password,
 						);
 						if (isPasswordValid) {
+							user.lastLogin = new Date();
+							await user.save();
 							return user;
 						}
 					}

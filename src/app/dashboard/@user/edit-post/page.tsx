@@ -11,14 +11,14 @@ export default function EditPost() {
 
 	const editPost = async () => {
 		const post = { title, content };
-		const response = await fetch('/dashboard/edit-post/api', {
-			method: 'POST',
-			body: JSON.stringify(post),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-		if (response.ok) router.back();
+		// const response = await fetch('/dashboard/edit-post/api', {
+		// 	method: 'POST',
+		// 	body: JSON.stringify(post),
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 	},
+		// });
+		// if (response.ok) router.back();
 		console.log(post);
 	};
 

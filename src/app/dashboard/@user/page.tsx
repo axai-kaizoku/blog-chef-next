@@ -1,5 +1,5 @@
 'use client';
-import { Post } from '@/app/data';
+import Post from '@/types/Post';
 import DeleteBtn from '@/components/DeleteBtn';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -7,11 +7,7 @@ import { useEffect, useState } from 'react';
 export default function UserDashboard() {
 	const [posts, setPosts] = useState([]);
 
-	const getPosts = async () => {
-		const response = await fetch('/dashboard/api');
-		const data = await response.json();
-		setPosts(data);
-	};
+	const getPosts = async () => {};
 
 	useEffect(() => {
 		getPosts();
@@ -39,7 +35,7 @@ export default function UserDashboard() {
 							<ul className="flex flex-col m-4">
 								{posts.map((post: Post) => (
 									<li
-										key={post.id}
+										key={post._id}
 										className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-row justify-between items-center">
 										<p className="w-4/5">
 											<p className="font-medium">{post.title}</p>
