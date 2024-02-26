@@ -20,15 +20,15 @@ export default function CreatePost() {
 		clearError();
 
 		const title = e.target[0].value.trim();
-		const content = e.target[1].value.trim();
+		const content = e.target[1].value;
 
 		if (title.length < 4) {
-			setErrorMsg('Title should be minimum 4 ');
+			setErrorMsg('Title should have a minimum length of 4 characters.');
 			return;
 		}
 
-		if (content.length < 50) {
-			setErrorMsg('Content should be minimum 50 ');
+		if (content.length < 200 && content.length > 400) {
+			setErrorMsg('Content should be between 50 and 120 words.');
 			return;
 		}
 
@@ -79,7 +79,7 @@ export default function CreatePost() {
 										name="title"
 										id="title"
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-										placeholder="Bard is now Gemini"
+										placeholder="Title"
 										required
 									/>
 								</div>
@@ -91,7 +91,7 @@ export default function CreatePost() {
 									</label>
 									<textarea
 										id="message"
-										rows={2}
+										rows={3}
 										className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
 										placeholder="Content goes here..."
 									/>

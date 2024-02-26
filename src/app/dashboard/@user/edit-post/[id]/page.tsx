@@ -5,20 +5,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import useUser from '@/hooks/use-user';
 
 export default function EditPost() {
+	const user = useUser();
 	const router = useRouter();
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
-	const [user, setUser] = useState({});
 
 	const params = useParams();
-
-	const getUser = async () => {
-		const res = await fetch('/api/user');
-		const data = await res.json();
-		setUser(data);
-	};
 
 	const getPost = async () => {
 		try {
@@ -61,7 +56,6 @@ export default function EditPost() {
 	};
 
 	useEffect(() => {
-		getUser();
 		getPost();
 	}, []);
 
@@ -69,13 +63,14 @@ export default function EditPost() {
 		<>
 			<div className="p-7 flex flex-row justify-between">
 				<h1 className="text-3xl font-semibold ">User Dashboard</h1>
-
-				<div>
-					<p>{user.name}</p>
-					<p className="text-xs font-extralight">
-						Last logged: {formatDate(user.updatedAt)}
-					</p>
-				</div>
+				{user && (
+					<div>
+						<p>{user.name}</p>
+						<p className="text-xs font-extralight">
+							Last logged: {formatDate(user.updatedAt)}
+						</p>
+					</div>
+				)}
 			</div>
 			<div className="flex items-center justify-center">
 				<div className="w-full mx-5 border "></div>
@@ -119,7 +114,7 @@ export default function EditPost() {
 									</label>
 									<textarea
 										id="message"
-										rows={2}
+										rows={3}
 										value={content}
 										onChange={(e) => setContent(e.target.value)}
 										className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
@@ -139,3 +134,5 @@ export default function EditPost() {
 		</>
 	);
 }
+
+

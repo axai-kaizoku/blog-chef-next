@@ -13,7 +13,7 @@ export default function Signin() {
 
 	useEffect(() => {
 		if (session?.status === 'authenticated') {
-			router.replace('/dashboard');
+			router.replace('/');
 		}
 	}, [session, router]);
 

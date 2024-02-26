@@ -16,15 +16,15 @@ export default function Signup() {
 		const password = e.target[2].value.trim();
 
 		if (name.length < 3) {
-			setErrorMsg('Name should be greater than 3 ');
+			setErrorMsg('Name must be at least 3 characters long.');
 			return;
 		}
 		if (!validateEmail(email)) {
-			setErrorMsg('Invalid Email address');
+			setErrorMsg('Invalid Email address.');
 			return;
 		}
 		if (password.length < 6) {
-			setErrorMsg('Password should be greater than 6 ');
+			setErrorMsg('Password must be at least 6 characters long.');
 			return;
 		}
 

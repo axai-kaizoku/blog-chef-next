@@ -3,29 +3,22 @@ import Post from '@/types/Post';
 import DeleteBtn from '@/components/DeleteBtn';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
+import useUser from '@/hooks/use-user';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import formatDate from '@/utils/format-date';
 
 export default function UserDashboard() {
-	const [posts, setPosts] = useState([]);
-	const [user, setUser] = useState({});
-	const router = useRouter();
 	const { data: session, status: sessionStatus } = useSession();
+	const user = useUser();
+	const [posts, setPosts] = useState([]);
+	const router = useRouter();
 
 	useEffect(() => {
 		if (sessionStatus === 'unauthenticated') {
 			router.replace('/signin');
 		}
 	}, [sessionStatus, router]);
-
-	const getUser = async () => {
-		const res = await fetch('/api/user');
-		const data = await res.json();
-		// console.log(data);
-		setUser(data);
-	};
 
 	const getPosts = async () => {
 		const res = await fetch('/api/user-posts');
@@ -50,19 +43,20 @@ export default function UserDashboard() {
 
 	useEffect(() => {
 		getPosts();
-		getUser();
 	}, []);
 
 	return (
 		<>
 			<div className="p-7 flex flex-row justify-between">
 				<h1 className="text-3xl font-semibold ">User Dashboard</h1>
-				<div>
-					<p>{user.name}</p>
-					<p className="text-xs font-extralight">
-						Last logged: {formatDate(user.updatedAt)}
-					</p>
-				</div>
+				{user && (
+					<div>
+						<p>{user.name}</p>
+						<p className="text-xs font-extralight">
+							Last logged: {formatDate(user.updatedAt)}
+						</p>
+					</div>
+				)}
 			</div>
 			<div className="flex items-center justify-center">
 				<div className="w-full mx-5 border "></div>

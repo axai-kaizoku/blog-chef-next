@@ -22,7 +22,6 @@ export async function POST(request: Request) {
 		});
 
 		await newPost.save();
-		// console.log(newPost);
 		return new NextResponse('Post created', { status: 201 });
 	} catch (error: any) {
 		return new NextResponse(error, {
@@ -35,9 +34,9 @@ export async function GET(request: Request) {
 	try {
 		await connect();
 		const posts = await Post.find()
+			.sort({ createdAt: -1 })
 			.populate('author', 'name')
-			.sort({ createdAt: -1 });
-		// console.log(posts);
+			.lean();
 		return Response.json(posts);
 	} catch (error: any) {
 		return new NextResponse(error, {
