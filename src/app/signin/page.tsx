@@ -3,10 +3,13 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
+import useError from '@/hooks/use-error';
+import validateEmail from '@/utils/email-validate';
 
 export default function Signin() {
 	const router = useRouter();
 	const session = useSession();
+	const { error, setErrorMsg, clearError } = useError();
 
 	useEffect(() => {
 		if (session?.status === 'authenticated') {
@@ -16,8 +19,15 @@ export default function Signin() {
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
+		clearError();
+
 		const email = e.target[0].value;
 		const password = e.target[1].value;
+
+		if (!validateEmail(email)) {
+			setErrorMsg('Invalid Email address');
+			return;
+		}
 
 		const res = await signIn('credentials', {
 			redirect: false,
@@ -25,7 +35,12 @@ export default function Signin() {
 			password,
 		});
 
-		if (res?.ok) router.replace('/dashboard');
+		if (res?.error) {
+			setErrorMsg('Invalid email or password');
+			return;
+		}
+
+		if (res?.ok) router.replace('/');
 		router.refresh();
 	};
 
@@ -77,6 +92,9 @@ export default function Signin() {
 										className="text-sm font-medium text-primary-600 hover:underline ">
 										Forgot password?
 									</Link>
+								</div>
+								<div>
+									<span className="text-red-500">{error}</span>
 								</div>
 								<button
 									type="submit"

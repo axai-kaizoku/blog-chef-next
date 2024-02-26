@@ -2,10 +2,12 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import useError from '@/hooks/use-error';
 
 export default function CreatePost() {
 	const router = useRouter();
 	const { data: session, status: sessionStatus } = useSession();
+	const { error, setErrorMsg, clearError } = useError();
 
 	useEffect(() => {
 		if (sessionStatus === 'unauthenticated') {
@@ -15,10 +17,18 @@ export default function CreatePost() {
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-		const title = e.target[0].value;
-		const content = e.target[1].value;
+		clearError();
 
-		if (title.length < 4 || content.length < 50) {
+		const title = e.target[0].value.trim();
+		const content = e.target[1].value.trim();
+
+		if (title.length < 4) {
+			setErrorMsg('Title should be minimum 4 ');
+			return;
+		}
+
+		if (content.length < 50) {
+			setErrorMsg('Content should be minimum 50 ');
 			return;
 		}
 
@@ -85,6 +95,9 @@ export default function CreatePost() {
 										className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
 										placeholder="Content goes here..."
 									/>
+								</div>
+								<div>
+									<span className="text-red-500">{error}</span>
 								</div>
 								<button
 									type="submit"

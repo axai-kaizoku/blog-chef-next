@@ -1,16 +1,33 @@
 'use client';
-
 import { useRouter } from 'next/navigation';
+import useError from '@/hooks/use-error';
+import validateEmail from '@/utils/email-validate';
 
 export default function Signup() {
 	const router = useRouter();
+	const { error, setErrorMsg, clearError } = useError();
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
+		clearError();
 
-		const name = e.target[0].value;
-		const email = e.target[1].value;
-		const password = e.target[2].value;
+		const name = e.target[0].value.trim();
+		const email = e.target[1].value.trim();
+		const password = e.target[2].value.trim();
+
+		if (name.length < 3) {
+			setErrorMsg('Name should be greater than 3 ');
+			return;
+		}
+		if (!validateEmail(email)) {
+			setErrorMsg('Invalid Email address');
+			return;
+		}
+		if (password.length < 6) {
+			setErrorMsg('Password should be greater than 6 ');
+			return;
+		}
+
 		const response = await fetch('/api/signup', {
 			method: 'POST',
 			body: JSON.stringify({ name, email, password }),
@@ -18,6 +35,10 @@ export default function Signup() {
 				'Content-Type': 'application/json',
 			},
 		});
+		if (response.status === 400) {
+			setErrorMsg('Email is already in use');
+			return;
+		}
 		if (response.ok) router.push('/signin');
 	};
 
@@ -78,7 +99,9 @@ export default function Signup() {
 										required
 									/>
 								</div>
-
+								<div>
+									<span className="text-red-500">{error}</span>
+								</div>
 								<button
 									type="submit"
 									className="w-full border  text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">

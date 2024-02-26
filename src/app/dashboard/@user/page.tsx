@@ -74,33 +74,37 @@ export default function UserDashboard() {
 							<h1 className="text-xl font-bold">Posts</h1>
 							<div className="border rounded border-gray-600"></div>
 							<ul className="flex flex-col m-4">
-								{posts.map((post: Post) => (
-									<li
-										key={post._id}
-										className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-row justify-between items-center">
-										<p className="w-4/5">
-											<p className="font-medium">{post.title}</p>
-											<p className="text-sm ">
-												{post.content.slice(
-													0,
-													post.content.lastIndexOf(' ', 50),
-												) + ' ...'}
+								{posts.length > 0 ? (
+									posts.map((post: Post) => (
+										<li
+											key={post._id}
+											className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-row justify-between items-center">
+											<p className="w-4/5">
+												<p className="font-medium">{post.title}</p>
+												<p className="text-sm ">
+													{post.content.slice(
+														0,
+														post.content.lastIndexOf(' ', 50),
+													) + ' ...'}
+												</p>
 											</p>
-										</p>
-										<button className="w-1/12">
-											<Link href={`/dashboard/edit-post/${post._id}`}>
-												Edit
-											</Link>
-										</button>
-										<button className="w-1/12 mx-2">
-											<DeleteBtn
-												btnSize={13}
-												btnName="Delete"
-												onDelete={() => deletePost(post._id)}
-											/>
-										</button>
-									</li>
-								))}
+											<button className="w-1/12">
+												<Link href={`/dashboard/edit-post/${post._id}`}>
+													Edit
+												</Link>
+											</button>
+											<button className="w-1/12 mx-2">
+												<DeleteBtn
+													btnSize={13}
+													btnName="Delete"
+													onDelete={() => deletePost(post._id)}
+												/>
+											</button>
+										</li>
+									))
+								) : (
+									<li className="text-center text-xl">No posts yet!</li>
+								)}
 							</ul>
 						</div>
 					</div>
