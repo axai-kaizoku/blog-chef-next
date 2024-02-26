@@ -10,7 +10,6 @@ import formatDate from '@/utils/format-date';
 
 export default function UserDashboard() {
 	const [posts, setPosts] = useState([]);
-
 	const [user, setUser] = useState({});
 	const router = useRouter();
 	const { data: session, status: sessionStatus } = useSession();
@@ -43,7 +42,7 @@ export default function UserDashboard() {
 			},
 		});
 		if (res.status === 200) {
-			router.push('/dashboard');
+			router.replace('/');
 		} else {
 			console.log('error occurred while deleting');
 		}

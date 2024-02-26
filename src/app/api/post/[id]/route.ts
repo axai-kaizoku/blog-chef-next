@@ -36,7 +36,7 @@ export async function PUT(
 		const { title, content } = await request.json();
 
 		const post = await Post.findOne({ _id: params.id });
-		console.log(post);
+		// console.log(post);
 		post.title = title;
 		post.content = content;
 		await post.save();

@@ -12,7 +12,9 @@ export async function GET() {
 		await connect();
 		const user = await User.findOne({ email: session.user?.email });
 		// console.log(user);
-		const posts = await Post.find({ author: user?._id });
+		const posts = await Post.find({ author: user?._id }).sort({
+			createdAt: -1,
+		});
 		// console.log(posts);
 		return Response.json(posts, { status: 200 });
 	} catch (error: any) {

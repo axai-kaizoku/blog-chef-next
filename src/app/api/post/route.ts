@@ -34,7 +34,9 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
 	try {
 		await connect();
-		const posts = await Post.find().populate('author', 'name');
+		const posts = await Post.find()
+			.populate('author', 'name')
+			.sort({ createdAt: -1 });
 		// console.log(posts);
 		return Response.json(posts);
 	} catch (error: any) {
