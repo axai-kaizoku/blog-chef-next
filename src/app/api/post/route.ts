@@ -7,7 +7,6 @@ import { getServerSession } from 'next-auth';
 export async function POST(request: Request) {
 	try {
 		const session = await getServerSession();
-		// console.log('HEOO', session);
 		if (!session) {
 			return Response.json({ error: 'Unauthorized' });
 		}
@@ -34,6 +33,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
 	try {
+		await connect();
 		const posts = await Post.find().populate('author', 'name');
 		// console.log(posts);
 		return Response.json(posts);

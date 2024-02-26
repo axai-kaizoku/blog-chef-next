@@ -23,8 +23,6 @@ export const authOptions: AuthOptions = {
 							user.password,
 						);
 						if (isPasswordValid) {
-							user.lastLogin = new Date();
-							await user.save();
 							return user;
 						}
 					}

@@ -4,23 +4,65 @@ import DeleteBtn from '@/components/DeleteBtn';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import formatDate from '@/utils/format-date';
+
 export default function UserDashboard() {
 	const [posts, setPosts] = useState([]);
 
-	const getPosts = async () => {};
+	const [user, setUser] = useState({});
+	const router = useRouter();
+	const { data: session, status: sessionStatus } = useSession();
+
+	useEffect(() => {
+		if (sessionStatus === 'unauthenticated') {
+			router.replace('/signin');
+		}
+	}, [sessionStatus, router]);
+
+	const getUser = async () => {
+		const res = await fetch('/api/user');
+		const data = await res.json();
+		// console.log(data);
+		setUser(data);
+	};
+
+	const getPosts = async () => {
+		const res = await fetch('/api/user-posts');
+		const data = await res.json();
+		// console.log(data);
+		setPosts(data);
+	};
+
+	const deletePost = async (id: string) => {
+		const res = await fetch(`/api/post/${id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		if (res.status === 200) {
+			router.push('/dashboard');
+		} else {
+			console.log('error occurred while deleting');
+		}
+	};
 
 	useEffect(() => {
 		getPosts();
+		getUser();
 	}, []);
 
 	return (
 		<>
 			<div className="p-7 flex flex-row justify-between">
 				<h1 className="text-3xl font-semibold ">User Dashboard</h1>
-
 				<div>
-					<p>Axai Kaizoku</p>
-					<p className="text-xs font-extralight">Last logged: 16:00 19th Feb</p>
+					<p>{user.name}</p>
+					<p className="text-xs font-extralight">
+						Last logged: {formatDate(user.updatedAt)}
+					</p>
 				</div>
 			</div>
 			<div className="flex items-center justify-center">
@@ -39,18 +81,23 @@ export default function UserDashboard() {
 										className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-row justify-between items-center">
 										<p className="w-4/5">
 											<p className="font-medium">{post.title}</p>
-											<p className="text-sm ">{post.content}</p>
+											<p className="text-sm ">
+												{post.content.slice(
+													0,
+													post.content.lastIndexOf(' ', 50),
+												) + ' ...'}
+											</p>
 										</p>
 										<button className="w-1/12">
-											<Link href="/dashboard/edit-post">Edit</Link>
+											<Link href={`/dashboard/edit-post/${post._id}`}>
+												Edit
+											</Link>
 										</button>
 										<button className="w-1/12 mx-2">
 											<DeleteBtn
 												btnSize={13}
 												btnName="Delete"
-												onDelete={() => {
-													console.log('Deleted');
-												}}
+												onDelete={() => deletePost(post._id)}
 											/>
 										</button>
 									</li>

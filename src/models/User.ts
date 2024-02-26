@@ -21,18 +21,8 @@ const userSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
-		lastLogin: {
-			type: Date,
-			default: new Date(),
-		},
 	},
 	{ timestamps: true },
 );
-
-userSchema.pre('save', async function (next) {
-	const currentDate = new Date();
-	this.lastLogin = currentDate;
-	next();
-});
 
 export default mongoose.models.User || mongoose.model('User', userSchema);

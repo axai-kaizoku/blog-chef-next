@@ -1,26 +1,69 @@
 'use client';
 
+import formatDate from '@/utils/format-date';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function EditPost() {
 	const router = useRouter();
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
+	const [user, setUser] = useState({});
 
-	const editPost = async () => {
-		const post = { title, content };
-		// const response = await fetch('/dashboard/edit-post/api', {
-		// 	method: 'POST',
-		// 	body: JSON.stringify(post),
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// });
-		// if (response.ok) router.back();
-		console.log(post);
+	const params = useParams();
+
+	const getUser = async () => {
+		const res = await fetch('/api/user');
+		const data = await res.json();
+		setUser(data);
 	};
+
+	const getPost = async () => {
+		try {
+			const res = await fetch(`/api/post/${params.id}`);
+			const data = await res.json();
+
+			setTitle(data.title);
+			setContent(data.content);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleSubmit = async (e: any) => {
+		e.preventDefault();
+
+		if (title.length < 4 || content.length < 50) {
+			return;
+		}
+		try {
+			const res = await fetch(`/api/post/${params.id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					title,
+					content,
+				}),
+			});
+
+			if (res.status === 200) {
+				router.push('/dashboard');
+			} else {
+				console.log('Error updating post: ');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		getUser();
+		getPost();
+	}, []);
 
 	return (
 		<>
@@ -28,8 +71,10 @@ export default function EditPost() {
 				<h1 className="text-3xl font-semibold ">User Dashboard</h1>
 
 				<div>
-					<p>Axai Kaizoku</p>
-					<p className="text-xs font-extralight">Last logged: 16:00 19th Feb</p>
+					<p>{user.name}</p>
+					<p className="text-xs font-extralight">
+						Last logged: {formatDate(user.updatedAt)}
+					</p>
 				</div>
 			</div>
 			<div className="flex items-center justify-center">
@@ -46,10 +91,7 @@ export default function EditPost() {
 								Edit Blog Post
 							</h1>
 							<form
-								onSubmit={(e) => {
-									e.preventDefault();
-									editPost();
-								}}
+								onSubmit={handleSubmit}
 								className="space-y-4 md:space-y-6"
 								action="#">
 								<div>

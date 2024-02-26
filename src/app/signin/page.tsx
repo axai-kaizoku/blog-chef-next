@@ -1,13 +1,11 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 
 export default function Signin() {
 	const router = useRouter();
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
 	const session = useSession();
 
 	useEffect(() => {
@@ -16,8 +14,10 @@ export default function Signin() {
 		}
 	}, [session, router]);
 
-	const loginUser = async () => {
-		const user = { email, password };
+	const handleSubmit = async (e: any) => {
+		e.preventDefault();
+		const email = e.target[0].value;
+		const password = e.target[1].value;
 
 		const res = await signIn('credentials', {
 			redirect: false,
@@ -40,10 +40,7 @@ export default function Signin() {
 							</h1>
 							<form
 								className="space-y-4 md:space-y-6"
-								onSubmit={(e) => {
-									e.preventDefault();
-									loginUser();
-								}}>
+								onSubmit={handleSubmit}>
 								<div>
 									<label
 										htmlFor="signinEmail"
@@ -56,8 +53,6 @@ export default function Signin() {
 										id="signinEmail"
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
 										placeholder="name@example.com"
-										value={email}
-										onChange={(e) => setEmail(e.target.value)}
 										required
 									/>
 								</div>
@@ -72,8 +67,6 @@ export default function Signin() {
 										name="password"
 										id="signinPassword"
 										placeholder="••••••••"
-										value={password}
-										onChange={(e) => setPassword(e.target.value)}
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
 										required
 									/>

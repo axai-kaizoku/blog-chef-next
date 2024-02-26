@@ -1,21 +1,19 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 export default function Signup() {
 	const router = useRouter();
 
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [error, setError] = useState('');
+	const handleSubmit = async (e: any) => {
+		e.preventDefault();
 
-	const createUser = async () => {
-		const newUser = { name, email, password };
+		const name = e.target[0].value;
+		const email = e.target[1].value;
+		const password = e.target[2].value;
 		const response = await fetch('/api/signup', {
 			method: 'POST',
-			body: JSON.stringify(newUser),
+			body: JSON.stringify({ name, email, password }),
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -34,10 +32,7 @@ export default function Signup() {
 							</h1>
 							<form
 								className="space-y-4 md:space-y-6"
-								onSubmit={(e) => {
-									e.preventDefault();
-									createUser();
-								}}>
+								onSubmit={handleSubmit}>
 								<div>
 									<label
 										htmlFor="name"
@@ -48,8 +43,6 @@ export default function Signup() {
 										type="text"
 										name="name"
 										id="name"
-										value={name}
-										onChange={(e) => setName(e.target.value)}
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
 										placeholder="Dan Jeo"
 										required
@@ -65,8 +58,6 @@ export default function Signup() {
 										type="email"
 										name="email"
 										id="email"
-										value={email}
-										onChange={(e) => setEmail(e.target.value)}
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
 										placeholder="name@example.com"
 										required
@@ -83,8 +74,6 @@ export default function Signup() {
 										name="password"
 										id="password"
 										placeholder="••••••••"
-										value={password}
-										onChange={(e) => setPassword(e.target.value)}
 										className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
 										required
 									/>

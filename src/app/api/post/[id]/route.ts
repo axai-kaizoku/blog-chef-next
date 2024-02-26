@@ -29,14 +29,33 @@ export async function GET(
 
 export async function PUT(
 	request: Request,
-	{ params }: { params: { _id: string } },
+	{ params }: { params: { id: string } },
 ) {
-	return Response.json({ message: 'PUt funtion' });
+	await connect();
+	try {
+		const { title, content } = await request.json();
+
+		const post = await Post.findOne({ _id: params.id });
+		console.log(post);
+		post.title = title;
+		post.content = content;
+		await post.save();
+		return Response.json(post, { status: 200 });
+	} catch (error: any) {
+		console.error('Error fetching post:', error);
+		return Response.json({ error: 'Internal server error' }, { status: 500 });
+	}
 }
 
 export async function DELETE(
 	request: Request,
 	{ params }: { params: { id: string } },
 ) {
-	return Response.json({ message: 'Delete function' });
+	await connect();
+	try {
+		await Post.findByIdAndDelete(params.id);
+		return Response.json({ message: 'Deleted Successfully' }, { status: 200 });
+	} catch (error: any) {
+		return Response.json(error, { status: 500 });
+	}
 }

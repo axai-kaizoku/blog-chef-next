@@ -1,8 +1,9 @@
-import User from '@/models/User';
-import connect from '@/utils/db';
 import { getServerSession } from 'next-auth';
+import connect from '@/utils/db';
+import User from '@/models/User';
+import Post from '@/models/Post';
 
-export async function GET(request: any) {
+export async function GET() {
 	try {
 		const session = await getServerSession();
 		if (!session) {
@@ -10,7 +11,10 @@ export async function GET(request: any) {
 		}
 		await connect();
 		const user = await User.findOne({ email: session.user?.email });
-		return Response.json(user, { status: 200 });
+		// console.log(user);
+		const posts = await Post.find({ author: user?._id });
+		// console.log(posts);
+		return Response.json(posts, { status: 200 });
 	} catch (error: any) {
 		return Response.json(error, { status: 500 });
 	}
