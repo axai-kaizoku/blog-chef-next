@@ -12,11 +12,11 @@ const matcher = new RegExpMatcher({
 
 const censor = new TextCensor();
 
-export const censorContent = (content: any) => {
+export const censorContent = async (content: any) => {
 	const matches = matcher.getAllMatches(content);
 	return censor.applyTo(content, matches);
 };
 
-export const profanityFilter = (content: any) => {
+export const profanityFilter = async (content: any) => {
 	return matcher.hasMatch(content);
 };

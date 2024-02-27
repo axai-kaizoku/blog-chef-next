@@ -2,14 +2,31 @@
 import DeleteBtn from '@/components/DeleteBtn';
 import { useEffect, useState } from 'react';
 import Post from '@/types/Post';
+import { useRouter } from 'next/navigation';
 
 export default function Posts() {
+	const router = useRouter();
 	const [posts, setPosts] = useState([]);
 
 	const getAllPosts = async () => {
 		const response = await fetch('/api/flagged-posts');
 		const data = await response.json();
 		setPosts(data);
+	};
+
+	const approvePost = async (id: string) => {
+		try {
+			const res = await fetch('/api/flagged-posts', {
+				method: 'PUT',
+				body: JSON.stringify({ id }),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+			if (res.status === 200) router.push('/');
+		} catch (error: any) {
+			console.log(error);
+		}
 	};
 
 	useEffect(() => {
@@ -36,7 +53,7 @@ export default function Posts() {
 								<DeleteBtn
 									btnSize={14}
 									btnName="Approve"
-									onDelete={() => console.log('Post approved')}
+									onDelete={() => approvePost(post._id)}
 								/>
 							</div>
 						</li>

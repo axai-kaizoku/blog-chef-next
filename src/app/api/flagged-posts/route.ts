@@ -1,5 +1,6 @@
 import connect from '@/utils/db';
 import Post from '@/models/Post';
+import { censorContent } from '@/utils/profanity-filter';
 
 export async function GET() {
 	await connect();
@@ -14,10 +15,21 @@ export async function GET() {
 	}
 }
 
-export async function PUT() {
+export async function PUT(request: Request) {
 	await connect();
-
 	try {
+		const { id } = await request.json();
+		console.log(id);
+		const post = await Post.findById(id);
+		console.log(post);
+		post.content = await censorContent(post.content);
+		console.log(post.content);
+		post.isApproved = true;
+		await post.save();
+		return Response.json(
+			{ message: 'Approved successfully!' },
+			{ status: 200 },
+		);
 	} catch (error: any) {
 		return Response.json(error, { status: 500 });
 	}
