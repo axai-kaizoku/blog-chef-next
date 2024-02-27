@@ -24,13 +24,16 @@ Blog Chef offers seamless blog creation and management. With robust user authent
 ## Screenshots
 
 Home Page
-![App Screenshot](/blog-chef-home.png)
+![Home](/blog-chef-home.png)
 
 Preview Modal
-![App Screenshot](/blog-chef-modal.png)
+![Modal](/blog-chef-modal.png)
 
 User Dashboard
-![App Screenshot](/blog-chef-user-dashboard.png)
+![User Dashboard](/blog-chef-user-dashboard.png)
+
+Admin Dashboard
+![Admin Dashboard](/blog-chef-admin-dashboard.png)
 
 ## Demo
 
