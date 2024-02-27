@@ -53,10 +53,10 @@ export default function Modal({ route = '', children }: ModalProps) {
 		<div
 			ref={overLay}
 			onClick={onClick}
-			className="fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto bg-black/60 p-10">
+			className="fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto  bg-black/60 p-10">
 			<div
 				ref={wrapper}
-				className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  m-4 h-4/5 w-2/3 ">
+				className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  m-4  w-2/3 ">
 				{children}
 			</div>
 		</div>
