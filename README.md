@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blog Chef
 
-## Getting Started
+[Live Preview](https://blog-chef-next.vercel.app/)
 
-First, run the development server:
+Blog Chef offers seamless blog creation and management. With robust user authentication and authorization, it ensures a secure environment. The app includes a profanity filter for content screening and features an admin page for streamlined management of posts and user permissions. Utilizing the popular framework Nextjs, Blog Chef provides a user-friendly experience for creating, editing, and deleting blog posts.
+
+## Technologies
+
+- [Next js](https://nextjs.org/)
+- [React js](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Node js](https://nodejs.org/en/)
+- [Next Auth](https://next-auth.js.org/)
+- [Mongo DB](https://www.mongodb.com/)
+
+## Features
+
+- Signup and Signin
+- Authorization
+- Preview Modal
+- Profanity Filter
+- Admin Page
+
+## Screenshots
+
+Home Page
+![App Screenshot](/blog-chef-home.png)
+
+Preview Modal
+![App Screenshot](/blog-chef-modal.png)
+
+User Dashboard
+![App Screenshot](/blog-chef-user-dashboard.png)
+
+## Demo
+
+Deployed on Vercel
+
+[blog-chef-next.vercel.app](https://blog-chef-next.vercel.app/)
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/axai-kaizoku/blog-chef-next.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd blog-chef-next
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[MIT](https://choosealicense.com/licenses/mit/)
