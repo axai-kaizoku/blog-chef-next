@@ -43,7 +43,7 @@ export default function Posts() {
 							key={post._id}
 							className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-row justify-between items-center">
 							<div className="w-4/5">
-								<div className="flex flex-row justify-between items-center">
+								<div className="flex flex-col sm:flex-row justify-between sm:items-center">
 									<p className="font-medium">{post.title}</p>
 									<p className="text-xs">By {post.author.name}</p>
 								</div>

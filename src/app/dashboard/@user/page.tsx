@@ -12,6 +12,7 @@ export default function UserDashboard() {
 	const { data: session, status: sessionStatus } = useSession();
 	const user = useUser();
 	const [posts, setPosts] = useState([]);
+	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 
 	useEffect(() => {
@@ -21,9 +22,11 @@ export default function UserDashboard() {
 	}, [sessionStatus, router]);
 
 	const getPosts = async () => {
+		setLoading(true);
 		const res = await fetch('/api/user-posts');
 		const data = await res.json();
 		setPosts(data);
+		setLoading(false);
 	};
 
 	const deletePost = async (id: string) => {
@@ -67,11 +70,15 @@ export default function UserDashboard() {
 							<h1 className="text-xl font-bold">Posts</h1>
 							<div className="border rounded border-gray-600"></div>
 							<ul className="flex flex-col m-4">
-								{posts.length > 0 ? (
+								{loading ? (
+									<div className="flex flex-row justify-center items-center w-full ">
+										<div className="w-9 h-9 border-t-8 rounded-full border-8 border-t-slate-500 border-gray-300 animate-spin"></div>
+									</div>
+								) : posts.length > 0 ? (
 									posts.map((post: Post) => (
 										<li
 											key={post._id}
-											className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-row justify-between items-center">
+											className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-col sm:flex-row justify-between items-center">
 											<p className="w-4/5">
 												<p className="font-medium">{post.title}</p>
 												<p className="text-sm ">
@@ -81,12 +88,12 @@ export default function UserDashboard() {
 													) + ' ...'}
 												</p>
 											</p>
-											<button className="w-1/12">
+											<button className="w-1/12 py-2 sm:py-0">
 												<Link href={`/dashboard/edit-post/${post._id}`}>
 													Edit
 												</Link>
 											</button>
-											<button className="w-1/12 mx-2">
+											<button className="w-1/12 mx-2 py-2 sm:py-0">
 												<DeleteBtn
 													btnSize={13}
 													btnName="Delete"

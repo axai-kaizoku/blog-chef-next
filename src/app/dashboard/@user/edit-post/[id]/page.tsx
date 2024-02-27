@@ -46,7 +46,7 @@ export default function EditPost() {
 			});
 
 			if (res.status === 200) {
-				router.push('/dashboard');
+				router.back();
 			} else {
 				console.log('Error updating post: ');
 			}
@@ -134,5 +134,3 @@ export default function EditPost() {
 		</>
 	);
 }
-
-

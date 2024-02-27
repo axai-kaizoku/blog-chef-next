@@ -18,14 +18,16 @@ export default function Home() {
 	return (
 		<>
 			<div className="p-7">
-				<h1 className="text-3xl font-semibold ">Welcome to BlogChef.</h1>
+				<h1 className="text-3xl font-semibold sm:text-4xl">
+					Welcome to BlogChef.
+				</h1>
 				<p>Tech and Trendy Blogs</p>
 			</div>
 			<div className="flex items-center justify-center">
 				<div className="w-full mx-5 border "></div>
 			</div>
-			<div className="flex items-center justify-center w-full h-0">
-				<div className="flex flex-row justify-center w-11/12 h-full p-8">
+			<div className="flex items-center justify-center w-full h-full">
+				<div className="flex flex-row justify-center w-full h-full py-4 px-6">
 					<div className="flex flex-row flex-wrap w-full h-full m-8">
 						{posts.length > 0 ? (
 							posts.map((post: Post) => (
