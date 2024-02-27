@@ -23,7 +23,6 @@ export default function UserDashboard() {
 	const getPosts = async () => {
 		const res = await fetch('/api/user-posts');
 		const data = await res.json();
-		// console.log(data);
 		setPosts(data);
 	};
 

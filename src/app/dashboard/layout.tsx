@@ -1,5 +1,6 @@
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import getUser from '@/lib/get-user';
 
 export default async function DashboardLayout({
 	children,
@@ -12,27 +13,28 @@ export default async function DashboardLayout({
 	posts: React.ReactNode;
 	user: React.ReactNode;
 }) {
-	const isLoggedIn = true;
-	const isAdmin = false;
 	const session = await getServerSession();
 	if (!session) {
 		redirect('/');
 	}
-	return isLoggedIn && isAdmin ? (
+
+	const userRole = await getUser();
+	const isAdmin = userRole.isAdmin;
+	return session && isAdmin ? (
 		<div>
 			{children}
 			<div className="w-full h-5/6 flex flex-row justify-center items-center">
 				<div className=" w-11/12 h-full flex flex-row justify-between p-6">
-					<div className=" bg-slate-50  shadow-lg w-3/5 p-3 rounded">
+					<div className=" bg-slate-50 h-fit shadow-lg w-3/5 p-3 rounded">
 						{posts}
 					</div>
-					<div className=" bg-slate-50 shadow-lg w-1/3 p-3 rounded">
+					<div className=" bg-slate-50 h-fit shadow-lg w-1/3 p-3 rounded">
 						{users}
 					</div>
 				</div>
 			</div>
 		</div>
-	) : isLoggedIn && !isAdmin ? (
+	) : session && !isAdmin ? (
 		<div>{user}</div>
 	) : (
 		<div className="w-full h-full flex flex-row justify-center items-center">
