@@ -1,5 +1,6 @@
 import Post from '@/models/Post';
 import connect from '@/utils/db';
+import { profanityFilter } from '@/utils/profanity-filter';
 
 export async function GET(
 	request: Request,
@@ -35,10 +36,13 @@ export async function PUT(
 	try {
 		const { title, content } = await request.json();
 
+		const badWords = profanityFilter(content) || profanityFilter(title);
+
 		const post = await Post.findOne({ _id: params.id });
-		// console.log(post);
+
 		post.title = title;
 		post.content = content;
+		post.isApproved = !badWords;
 		await post.save();
 		return Response.json(post, { status: 200 });
 	} catch (error: any) {

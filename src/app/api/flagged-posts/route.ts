@@ -4,7 +4,7 @@ import Post from '@/models/Post';
 export async function GET() {
 	await connect();
 	try {
-		const flaggedPosts = await Post.find({ isApproved: true }).populate(
+		const flaggedPosts = await Post.find({ isApproved: false }).populate(
 			'author',
 			'name',
 		);
