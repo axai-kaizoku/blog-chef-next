@@ -26,7 +26,7 @@ export default function Home() {
 			<div className="flex items-center justify-center">
 				<div className="w-full mx-5 border "></div>
 			</div>
-			<div className="flex items-center justify-center w-full h-full">
+			<div className="flex items-center justify-center w-full h-0">
 				<div className="flex flex-row justify-center w-full h-full py-4 px-6">
 					<div className="flex flex-row flex-wrap w-full h-full m-8">
 						{posts.length > 0 ? (
