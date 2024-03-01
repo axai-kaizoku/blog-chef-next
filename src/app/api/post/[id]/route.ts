@@ -36,7 +36,7 @@ export async function PUT(
 	try {
 		const { title, content } = await request.json();
 
-		const badWords = profanityFilter(content);
+		const badWords = await profanityFilter(content);
 
 		const post = await Post.findOne({ _id: params.id });
 
