@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 
 		const author = await User.findOne({ email: session.user?.email });
 
-		const badWords = profanityFilter(content);
+		const badWords = await profanityFilter(content);
 
 		const newPost = new Post({
 			title,
