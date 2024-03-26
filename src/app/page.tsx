@@ -71,7 +71,7 @@ const posts = [
 
 export default function Home() {
 	return (
-		<main>
+		<>
 			<div className="p-7">
 				<h1 className="text-3xl font-semibold sm:text-4xl">
 					Welcome to BlogChef.
@@ -90,6 +90,6 @@ export default function Home() {
 					/>
 				))}
 			</div>
-		</main>
+		</>
 	);
 }

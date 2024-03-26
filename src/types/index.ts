@@ -6,7 +6,7 @@ export interface ModalProps {
 
 export interface CustomFormProps {
 	title: string;
-	handleSubmit: () => void;
+	handleSubmit: (e: any) => Promise<void>;
 	btnText: string;
 	forgotPass: boolean;
 	terms: boolean;
@@ -19,6 +19,7 @@ export interface CustomFormProps {
 }
 
 export interface PostProps {
+	_id: string;
 	id: string;
 	title: string;
 	content: string;

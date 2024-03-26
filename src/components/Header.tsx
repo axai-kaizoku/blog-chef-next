@@ -1,10 +1,9 @@
 'use client';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useState } from 'react';
 
 export default function Header() {
-	const login = false;
-	const [isOpen, setIsOpen] = useState(false);
+	const { data: session }: any = useSession();
 	return (
 		<header className="w-full h-16 bg-slate-200">
 			<nav className="flex items-center justify-between px-20 py-4 max-md:flex-col">
@@ -21,13 +20,13 @@ export default function Header() {
 						</li>
 					</ul>
 					<ul className="flex gap-8">
-						{login ? (
+						{session ? (
 							<>
 								<li>
 									<Link href="/dashboard">Dashboard</Link>
 								</li>
-								<li>
-									<Link href="/logout">Logout</Link>
+								<li onClick={() => signOut()}>
+									<Link href="/">Logout</Link>
 								</li>
 							</>
 						) : (

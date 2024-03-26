@@ -2,6 +2,7 @@
 import CustomForm from '@/components/CustomForm';
 
 export default function CreatePost() {
+	const handleSubmit = async (e: any) => {};
 	return (
 		<CustomForm
 			blogContent={true}
@@ -9,7 +10,7 @@ export default function CreatePost() {
 			btnText="Post"
 			email={false}
 			forgotPass={false}
-			handleSubmit={() => console.log('create-post')}
+			handleSubmit={handleSubmit}
 			name={false}
 			password={false}
 			terms={false}
