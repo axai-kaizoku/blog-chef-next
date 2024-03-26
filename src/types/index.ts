@@ -17,3 +17,11 @@ export interface CustomFormProps {
 	blogContent: boolean;
 	error: string;
 }
+
+export interface PostProps {
+	id: string;
+	title: string;
+	content: string;
+	author: string;
+	createdAt: string;
+}
