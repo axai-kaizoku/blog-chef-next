@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
 	children,
-	modal,
-}: Readonly<{
+}: // modal,
+Readonly<{
 	children: React.ReactNode;
-	modal: React.ReactNode;
+	// modal: React.ReactNode;
 }>) {
 	return (
 		<html lang="en">
 			<body className={inter.className}>
 				<Header />
 				<main className="bg-slate-50">
-					{modal}
+					{/* {modal} */}
 					{children}
 				</main>
 			</body>
