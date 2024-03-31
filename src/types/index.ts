@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 export interface ModalProps {
 	children: ReactNode;
-	modalClose?: any;
+	modalClose?: () => void;
 }
 
 export interface CustomFormProps {

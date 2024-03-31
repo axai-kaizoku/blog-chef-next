@@ -54,7 +54,7 @@ export default function ModalSignUp() {
 		if (response.ok) router.push('/signin');
 	};
 	return (
-		<Modal>
+		<Modal modalClose={() => {}}>
 			<ModalCustomForm
 				btnText="Sign Up"
 				email={true}

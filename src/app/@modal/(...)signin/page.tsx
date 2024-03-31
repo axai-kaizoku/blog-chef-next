@@ -44,6 +44,7 @@ export default function ModalSignIn() {
 			setErrorMsg('Invalid email or password');
 			return;
 		}
+		clearError();
 
 		if (res?.ok) router.replace('/');
 		router.refresh();

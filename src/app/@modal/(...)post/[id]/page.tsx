@@ -28,7 +28,7 @@ export default function ModalPost() {
 		fetchPost();
 	}, []);
 	return (
-		<Modal>
+		<Modal modalClose={() => {}}>
 			{!load ? (
 				<section className="w-full h-fit">
 					<div className="max-w-screen-xl gap-8 px-4 py-8 mx-auto lg:py-16 lg:grid-cols-2 lg:gap-16">
