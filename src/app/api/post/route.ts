@@ -35,11 +35,11 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
+	await connect();
 	try {
-		await connect();
 		const posts = await Post.find({ isApproved: true })
 			.sort({ createdAt: -1 })
-			.populate('author', 'name')
+			.populate('author', 'fname lname')
 			.lean();
 		return Response.json(posts);
 	} catch (error: any) {

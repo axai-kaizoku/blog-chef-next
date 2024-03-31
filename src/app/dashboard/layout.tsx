@@ -36,11 +36,5 @@ export default async function DashboardLayout({
 		</div>
 	) : session && !isAdmin ? (
 		<div>{user}</div>
-	) : (
-		<div className="w-full h-full flex flex-row justify-center items-center">
-			<h1 className="mb-4 text-4xl font-thin leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl ">
-				Redirecting to login page ...
-			</h1>
-		</div>
-	);
+	) : null;
 }

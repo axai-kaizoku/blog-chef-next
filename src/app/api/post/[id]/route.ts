@@ -8,9 +8,9 @@ export async function GET(
 ) {
 	await connect();
 	try {
-		const post = await Post.findById({ _id: params.id }).populate(
+		const post = await Post.findById(params.id).populate(
 			'author',
-			'name',
+			'fname lname',
 		);
 		if (!post) {
 			return Response.json(

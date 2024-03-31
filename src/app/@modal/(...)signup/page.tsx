@@ -1,10 +1,11 @@
 'use client';
-import CustomForm from '@/components/CustomForm';
+import Modal from '@/components/Modal';
+import ModalCustomForm from '@/components/ModalCustomForm';
 import useError from '@/hooks/use-error';
 import validateEmail from '@/utils/email-validate';
 import { useRouter } from 'next/navigation';
 
-export default function SignUp() {
+export default function ModalSignUp() {
 	const router = useRouter();
 	const { error, setErrorMsg, clearError } = useError();
 	const handleSubmit = async (e: any) => {
@@ -53,18 +54,20 @@ export default function SignUp() {
 		if (response.ok) router.push('/signin');
 	};
 	return (
-		<CustomForm
-			btnText="Sign Up"
-			email={true}
-			name={true}
-			password={true}
-			forgotPass={false}
-			handleSubmit={handleSubmit}
-			terms={true}
-			blogTitle={false}
-			blogContent={false}
-			title="Create an Account"
-			error={error}
-		/>
+		<Modal>
+			<ModalCustomForm
+				btnText="Sign Up"
+				email={true}
+				name={true}
+				password={true}
+				forgotPass={false}
+				handleSubmit={handleSubmit}
+				terms={true}
+				blogTitle={false}
+				blogContent={false}
+				title="Create an Account"
+				error={error}
+			/>
+		</Modal>
 	);
 }

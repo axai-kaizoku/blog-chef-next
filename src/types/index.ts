@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 export interface ModalProps {
 	children: ReactNode;
+	modalClose?: any;
 }
 
 export interface CustomFormProps {
@@ -23,6 +24,15 @@ export interface PostProps {
 	id: string;
 	title: string;
 	content: string;
-	author: string;
+	author: UserProps;
 	createdAt: string;
+}
+
+export interface UserProps {
+	fname: string;
+	lname: string;
+	email: string;
+	password: string;
+	isAdmin: boolean;
+	updatedAt: Date;
 }

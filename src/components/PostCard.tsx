@@ -1,4 +1,6 @@
+'use client';
 import { PostProps } from '@/types';
+import formatDate from '@/utils/format-date';
 import Link from 'next/link';
 
 interface PostCardProps {
@@ -13,15 +15,17 @@ export default function PostCard({ post }: PostCardProps) {
 					{post.title}
 				</h5>
 				<div className="flex flex-row justify-between mt-1 mb-3">
-					<p className="text-xs font-normal">By {post.author}</p>
-					<p className="text-xs font-light">{post.createdAt}</p>
+					<p className="text-xs font-normal">
+						By {post.author.fname} {post.author.lname}
+					</p>
+					<p className="text-xs font-light">{formatDate(post.createdAt)}</p>
 				</div>
 				<p className="mb-3 font-normal text-gray-700 ">
 					{post.content.slice(0, post.content.lastIndexOf(' ', 80)) + ' ...'}
 				</p>
 			</div>
 			<Link
-				href={`post/${post.id}`}
+				href={`post/${post._id}`}
 				className="inline-flex items-center w-fit px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-slate-800 hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 ">
 				Read more
 			</Link>

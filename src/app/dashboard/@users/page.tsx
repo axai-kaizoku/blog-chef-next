@@ -1,7 +1,7 @@
 'use client';
 import DeleteBtn from '@/components/DeleteBtn';
 import { useEffect, useState } from 'react';
-import User from '@/types/User';
+import { UserProps } from '@/types';
 
 export default function Users() {
 	const [users, setUsers] = useState([]);
@@ -22,12 +22,14 @@ export default function Users() {
 			<div className="border rounded border-gray-600"></div>
 			<ul className="flex flex-col m-4">
 				{users.length > 0 ? (
-					users.map((user: User) => (
+					users.map((user: UserProps) => (
 						<li
 							key={user._id}
 							className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-row justify-between items-center">
 							<div>
-								<p>{user.name}</p>
+								<p>
+									{user.fname} {user.lname}
+								</p>
 								<p className="text-sm">{user.email}</p>
 							</div>
 							<div>

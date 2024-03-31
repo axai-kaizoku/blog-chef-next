@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
 	children,
-}: // modal,
-Readonly<{
+	modal,
+}: Readonly<{
 	children: React.ReactNode;
-	// modal: React.ReactNode;
+	modal: React.ReactNode;
 }>) {
 	const session = await getServerSession();
 	return (
@@ -27,7 +27,7 @@ Readonly<{
 				<AuthProvider session={session}>
 					<Header />
 					<main className="bg-slate-50">
-						{/* {modal} */}
+						{modal}
 						{children}
 					</main>
 				</AuthProvider>

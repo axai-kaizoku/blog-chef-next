@@ -2,8 +2,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import formatDate from '@/utils/format-date';
+import Modal from '@/components/Modal';
 
-export default function Post() {
+export default function ModalPost() {
 	const params = useParams();
 	const [load, setLoad] = useState(false);
 	const [post, setPost] = useState({
@@ -27,9 +28,9 @@ export default function Post() {
 		fetchPost();
 	}, []);
 	return (
-		<>
+		<Modal>
 			{!load ? (
-				<section className="w-full h-[90vh]">
+				<section className="w-full h-fit">
 					<div className="max-w-screen-xl gap-8 px-4 py-8 mx-auto lg:py-16 lg:grid-cols-2 lg:gap-16">
 						<div className="flex flex-col justify-center">
 							<h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl ">
@@ -49,10 +50,10 @@ export default function Post() {
 					</div>
 				</section>
 			) : (
-				<div className="flex flex-row justify-center items-center w-full h-[90vh] ">
+				<div className="flex flex-row justify-center items-center w-full h-[50vh] ">
 					<div className="w-9 h-9 border-t-8 rounded-full border-8 border-t-slate-500 border-gray-300 animate-spin"></div>
 				</div>
 			)}
-		</>
+		</Modal>
 	);
 }

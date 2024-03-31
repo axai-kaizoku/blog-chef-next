@@ -1,15 +1,22 @@
 'use client';
-import CustomForm from '@/components/CustomForm';
+
 import { signIn, useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import validateEmail from '@/utils/email-validate';
 import useError from '@/hooks/use-error';
+import Modal from '@/components/Modal';
+import ModalCustomForm from '@/components/ModalCustomForm';
 
-export default function SignIn() {
+export default function ModalSignIn() {
 	const router = useRouter();
 	const session = useSession();
 	const { error, setErrorMsg, clearError } = useError();
+	const [isModalOpen, setIsModalOpen] = useState(true);
+
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
 
 	useEffect(() => {
 		if (session?.status === 'authenticated') {
@@ -40,20 +47,27 @@ export default function SignIn() {
 
 		if (res?.ok) router.replace('/');
 		router.refresh();
+		closeModal();
 	};
 	return (
-		<CustomForm
-			title="Sign in to your account"
-			handleSubmit={handleSubmit}
-			btnText="Sign In"
-			forgotPass={true}
-			terms={false}
-			name={false}
-			email={true}
-			password={true}
-			blogTitle={false}
-			blogContent={false}
-			error={error}
-		/>
+		<>
+			{isModalOpen && (
+				<Modal modalClose={closeModal}>
+					<ModalCustomForm
+						title="Sign in to your account"
+						handleSubmit={handleSubmit}
+						btnText="Sign In"
+						forgotPass={true}
+						terms={false}
+						name={false}
+						email={true}
+						password={true}
+						blogTitle={false}
+						blogContent={false}
+						error={error}
+					/>
+				</Modal>
+			)}
+		</>
 	);
 }

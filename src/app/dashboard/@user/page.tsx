@@ -53,7 +53,10 @@ export default function UserDashboard() {
 				<h1 className="text-3xl font-semibold ">User Dashboard</h1>
 				{user && (
 					<div>
-						<p>{user.name}</p>
+						<p>
+							{user.fname} {user.lname}
+						</p>
+
 						<p className="text-xs font-extralight">
 							Last logged: {formatDate(user.updatedAt)}
 						</p>

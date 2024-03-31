@@ -5,12 +5,13 @@ import Image from 'next/image';
 import { Fragment, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function Modal({ children }: ModalProps) {
+export default function Modal({ children, modalClose }: ModalProps) {
 	const router = useRouter();
 	const [isOpen, setIsOpen] = useState(false);
 	const closeModal = () => {
-		router.back();
+		router.push('/');
 		setIsOpen(false);
+		modalClose();
 	};
 	useEffect(() => {
 		setIsOpen(true);

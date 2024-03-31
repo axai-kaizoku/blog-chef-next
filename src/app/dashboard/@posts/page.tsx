@@ -1,7 +1,7 @@
 'use client';
 import DeleteBtn from '@/components/DeleteBtn';
 import { useEffect, useState } from 'react';
-import Post from '@/types/Post';
+import { PostProps } from '@/types';
 import { useRouter } from 'next/navigation';
 
 export default function Posts() {
@@ -38,14 +38,16 @@ export default function Posts() {
 			<div className="border rounded border-gray-600"></div>
 			<ul className="flex flex-col m-4">
 				{posts.length > 0 ? (
-					posts.map((post: Post) => (
+					posts.map((post: PostProps) => (
 						<li
 							key={post._id}
 							className="py-2 px-1 rounded bg-slate-100 m-1 flex flex-row justify-between items-center">
 							<div className="w-4/5">
 								<div className="flex flex-col sm:flex-row justify-between sm:items-center">
 									<p className="font-medium">{post.title}</p>
-									<p className="text-xs">By {post.author.name}</p>
+									<p className="text-xs">
+										By {post.author.fname} {post.author.lname}
+									</p>
 								</div>
 								<p className="text-sm ">{post.content}</p>
 							</div>
