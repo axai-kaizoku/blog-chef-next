@@ -9,7 +9,7 @@ export default function Modal({ children, modalClose }: ModalProps) {
 	const router = useRouter();
 	const [isOpen, setIsOpen] = useState(false);
 	const closeModal = () => {
-		router.push('/');
+		router.back();
 		setIsOpen(false);
 		modalClose();
 	};

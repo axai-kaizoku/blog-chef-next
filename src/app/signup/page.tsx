@@ -6,11 +6,14 @@ import { useRouter } from 'next/navigation';
 
 export default function SignUp() {
 	const router = useRouter();
+
 	const { error, setErrorMsg, clearError } = useError();
+
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		clearError();
 		const fname = e.target[0].value.trim();
+		console.log(fname);
 		const lname = e.target[1].value.trim();
 		const email = e.target[2].value.trim();
 		const password = e.target[3].value.trim();

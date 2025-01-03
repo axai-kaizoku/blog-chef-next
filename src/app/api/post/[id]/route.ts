@@ -35,11 +35,8 @@ export async function PUT(
 	await connect();
 	try {
 		const { title, content } = await request.json();
-
 		const badWords = await profanityFilter(content);
-
 		const post = await Post.findOne({ _id: params.id });
-
 		post.title = title;
 		post.content = content;
 		post.isApproved = !badWords;

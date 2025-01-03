@@ -103,15 +103,11 @@ export default async function Home() {
 			<div className="flex items-center justify-center">
 				<div className="w-full mx-5 border "></div>
 			</div>
+
 			{/* Posts Section */}
 			<div className="flex flex-wrap gap-3 w-full min-h-[70vh] py-8 px-16">
 				{!isDataEmpty &&
-					posts.map((post) => (
-						<PostCard
-							post={post}
-							key={post._id}
-						/>
-					))}
+					posts.map((post) => <PostCard post={post} key={post._id} />)}
 			</div>
 		</>
 	);

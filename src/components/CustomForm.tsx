@@ -23,9 +23,7 @@ export default function CustomForm({
 						<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
 							{title}
 						</h1>
-						<form
-							className="space-y-4 md:space-y-6"
-							onSubmit={handleSubmit}>
+						<form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
 							{blogTitle && (
 								<div>
 									<label
@@ -137,10 +135,7 @@ export default function CustomForm({
 								)}
 								{terms && (
 									<div className="flex items-center space-x-2">
-										<input
-											type="checkbox"
-											className="font-medium text-sm"
-										/>
+										<input type="checkbox" className="font-medium text-sm" />
 										<label
 											htmlFor="terms2"
 											className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
