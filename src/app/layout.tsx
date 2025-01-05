@@ -14,10 +14,7 @@ export const metadata: Metadata = {
 	description: 'Basic Blog App created using Next',
 };
 
-export default async function RootLayout(props: {
-	modal: React.ReactNode;
-	children: React.ReactNode;
-}) {
+export default async function RootLayout(props: { modal: React.ReactNode;children: React.ReactNode;}) {
 	const session = await getServerSession();
 	return (
 		<html lang="en">

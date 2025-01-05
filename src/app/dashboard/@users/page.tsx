@@ -1,20 +1,23 @@
-'use client';
+// 'use client';
 import DeleteBtn from '@/components/DeleteBtn';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import User from '@/types/User';
 
-export default function Users() {
-	const [users, setUsers] = useState([]);
+export default async function Users() {
+	// const [users, setUsers] = useState([]);
 
 	const getAllUsers = async () => {
-		const response = await fetch('api/all-users');
+		const response = await fetch('http://localhost:3000/api/all-users');
 		const data = await response.json();
-		setUsers(data);
+		return data;
+		// setUsers(data);
 	};
+	const users = await getAllUsers();
+	// useEffect(() => {
+	// 	getAllUsers();
+	// }, []);   
 
-	useEffect(() => {
-		getAllUsers();
-	}, []);
+
 
 	return (
 		<div>
@@ -35,7 +38,7 @@ export default function Users() {
 									<DeleteBtn
 										btnSize={12}
 										btnName="Approve Admin?"
-										onDelete={() => console.log('Approved Admin')}
+										// onDelete={() => console.log('Approved Admin')}
 									/>
 								</p>
 							</div>

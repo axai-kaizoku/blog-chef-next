@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 interface BtnProps {
-	onDelete: Function;
+	onDelete?:  Function;
 	btnName: string;
 	btnSize: number;
 }
@@ -14,16 +14,22 @@ export default function DeleteBtn({
 	btnSize = 12,
 }: BtnProps) {
 	const [showConfirmation, setShowConfirmation] = useState(false);
+
 	const handleDeleteClick = () => {
+		console.log("handleDeleteClick")
+	
 		setShowConfirmation(true);
 	};
 
 	const handleYesClick = () => {
 		onDelete();
 		setShowConfirmation(false);
+		console.log("handleYesClick")
 	};
 
 	const handleNoClick = () => {
+		console.log("handleNoClick")
+
 		setShowConfirmation(false);
 	};
 

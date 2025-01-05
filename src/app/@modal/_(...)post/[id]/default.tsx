@@ -7,7 +7,7 @@ import formatDate from '@/utils/format-date';
 
 export default function Post() {
 	const params = useParams();
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [post, setPost] = useState<Post>({
 		_id: '',
 		title: '',

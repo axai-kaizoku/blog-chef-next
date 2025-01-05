@@ -12,7 +12,7 @@ export default function Signup() {
 		clearError();
 
 		const name = e.target[0].value.trim();
-		const email = e.target[1].value.trim();
+		const email = e.target[1].value.trim(); 
 		const password = e.target[2].value.trim();
 
 		if (name.length < 3) {
@@ -102,7 +102,7 @@ export default function Signup() {
 								<div>
 									<span className="text-red-500">{error}</span>
 								</div>
-								<button
+								<button 
 									type="submit"
 									className="w-full border  text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
 									Sign up
